@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet"  href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/1.0.0/anime.min.js"></script>
+    <script src="js/style.js"></script>  
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axios</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+<canvas id="c"></canvas>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>    
+
+    <div class="page1" id="landpage" >
+        
+         <div class="center-text">
+
+         <button class="hide-btn"><h2 class="text">AXIOS</h2></button>
+         <p class="text2">Technical Club Of IIIT Lucknow</p>
+         <div class="social-icons">
+            <a href="#"> <i class="fab fa-linkedin" aria-hidden="true"></i> </a>
+            <a href="#"> <i class="fab fa-instagram" aria-hidden="true"></i> </a>
+            <a href="#"> <i class="fab fa-github" aria-hidden="true"></i>    </a>
+            <a href="#"> <i class="fab fa-facebook" aria-hidden="true"></i>    </a>
+            <a href="#"> <i class="fab fa-medium" aria-hidden="true"></i>    </a>
+         </div>
+
+        </div>
+    </div>
+
+
+    <div class="page2">
+       <div class="title-box"><h2 class="title">WINGS</h2></div>
+        <div class="wings">
+           <a href="wings/web/webd.html"> 
+            <div class="wing" data-aos="fade-right">
+                <h2>Web Development</h2>
+                <p>BEYOND THE BROWSER <br> more</p>
+            </div>
+            </a>
+
+            <a href="wings/app/app.html"> 
+                <div class="wing" data-aos="fade-up">
+                    <h2>App Development</h2>
+                    <p>DESIGN FIRST , THEN CODE<br> more</p>
+                </div>
+            </a>
+
+            <a href="wings/Desing/desing.html"> 
+                <div class="wing" data-aos="fade-up">
+                    <h2>Desing</h2>
+                    <p>INTELLIGENCE MADE VISIBLE<br> more</p>
+                </div>
+            </a>
+
+            <a href="wings/Cyber/cyber.html"> 
+                <div class="wing" data-aos="fade-left">
+                    <h2>Cyber Security</h2>
+                    <p>YOUR WEAKNESS IS OUR STRENGTH<br> more</p>
+                </div>
+            </a>
+
+            <a href="wings/Ml/ml.html"> 
+                <div class="wing" data-aos="fade-right">
+                    <h2>Machine Learning</h2>
+                    <p>NEITHER GOOD NOR EVIL<br> more</p>
+                </div>
+            </a>
+
+            <a href="wings/CC/cc.html"> 
+                <div class="wing" data-aos="fade-left">
+                    <h2>Competitive Coding</h2>
+                    <p>BECAUSE CODING IS A SPORT<br> more</p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+
+<script>
+    AOS.init();
+</script>
+ 
+<script>
+    var c = document.getElementById("c");
+  var ctx = c.getContext("2d");
+  var cH;
+  var cW;
+  var bgColor = "#FF6138";
+  var animations = [];
+  var circles = [];
+  
+  var colorPicker = (function() {
+    var colors = ["#FF6138", "#FFBE53", "#2980B9", "#282741"];
+    var index = 0;
+    function next() {
+      index = index++ < colors.length-1 ? index : 0;
+      return colors[index];
+    }
+    function current() {
+      return colors[index]
+    }
+    return {
+      next: next,
+      current: current
+    }
+  })();
+  
+  function removeAnimation(animation) {
+    var index = animations.indexOf(animation);
+    if (index > -1) animations.splice(index, 1);
+  }
+  
+  function calcPageFillRadius(x, y) {
+    var l = Math.max(x - 0, cW - x);
+    var h = Math.max(y - 0, cH - y);
+    return Math.sqrt(Math.pow(l, 2) + Math.pow(h, 2));
+  }
+  
+  function addClickListeners() {
+    document.addEventListener("touchstart", handleEvent);
+    document.addEventListener("mousedown", handleEvent);
+  };
+  
+  function handleEvent(e) {
+      if (e.touches) { 
+        e.preventDefault();
+        e = e.touches[0];
+      }
+      var currentColor = colorPicker.current();
+      var nextColor = colorPicker.next();
+      var targetR = calcPageFillRadius(e.pageX, e.pageY);
+      var rippleSize = Math.min(200, (cW * .4));
+      var minCoverDuration = 750;
+      
+      var pageFill = new Circle({
+        x: e.pageX,
+        y: e.pageY,
+        r: 0,
+        fill: nextColor
+      });
+      var fillAnimation = anime({
+        targets: pageFill,
+        r: targetR,
+        duration:  Math.max(targetR / 2 , minCoverDuration ),
+        easing: "easeOutQuart",
+        complete: function(){
+          bgColor = pageFill.fill;
+          removeAnimation(fillAnimation);
+        }
+      });
+      
+      var ripple = new Circle({
+        x: e.pageX,
+        y: e.pageY,
+        r: 0,
+        fill: currentColor,
+        stroke: {
+          width: 3,
+          color: currentColor
+        },
+        opacity: 1
+      });
+      var rippleAnimation = anime({
+        targets: ripple,
+        r: rippleSize,
+        opacity: 0,
+        easing: "easeOutExpo",
+        duration: 900,
+        complete: removeAnimation
+      });
+      
+      var particles = [];
+      for (var i=0; i<32; i++) {
+        var particle = new Circle({
+          x: e.pageX,
+          y: e.pageY,
+          fill: currentColor,
+          r: anime.random(24, 48)
+        })
+        particles.push(particle);
+      }
+      var particlesAnimation = anime({
+        targets: particles,
+        x: function(particle){
+          return particle.x + anime.random(rippleSize, -rippleSize);
+        },
+        y: function(particle){
+          return particle.y + anime.random(rippleSize * 1.15, -rippleSize * 1.15);
+        },
+        r: 0,
+        easing: "easeOutExpo",
+        duration: anime.random(1000,1300),
+        complete: removeAnimation
+      });
+      animations.push(fillAnimation, rippleAnimation, particlesAnimation);
+  }
+  
+  function extend(a, b){
+    for(var key in b) {
+      if(b.hasOwnProperty(key)) {
+        a[key] = b[key];
+      }
+    }
+    return a;
+  }
+  
+  var Circle = function(opts) {
+    extend(this, opts);
+  }
+  
+  Circle.prototype.draw = function() {
+    ctx.globalAlpha = this.opacity || 1;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+    if (this.stroke) {
+      ctx.strokeStyle = this.stroke.color;
+      ctx.lineWidth = this.stroke.width;
+      ctx.stroke();
+    }
+    if (this.fill) {
+      ctx.fillStyle = this.fill;
+      ctx.fill();
+    }
+    ctx.closePath();
+    ctx.globalAlpha = 1;
+  }
+  
+  var animate = anime({
+    duration: Infinity,
+    update: function() {
+      ctx.fillStyle = bgColor;
+      ctx.fillRect(0, 0, cW, cH);
+      animations.forEach(function(anim) {
+        anim.animatables.forEach(function(animatable) {
+          animatable.target.draw();
+        });
+      });
+    }
+  });
+  
+  var resizeCanvas = function() {
+    cW = window.innerWidth;
+    cH = window.innerHeight;
+    c.width = cW * devicePixelRatio;
+    c.height = cH * devicePixelRatio;
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+  };
+  
+  (function init() {
+    resizeCanvas();
+    if (window.CP) {
+      // CodePen's loop detection was causin' problems
+      // and I have no idea why, so...
+      window.CP.PenTimer.MAX_TIME_IN_LOOP_WO_EXIT = 6000; 
+    }
+    window.addEventListener("resize", resizeCanvas);
+    addClickListeners();
+    if (!!window.location.pathname.match(/fullcpgrid/)) {
+      startFauxClicking();
+    }
+    handleInactiveUser();
+  })();
+  
+  function handleInactiveUser() {
+    var inactive = setTimeout(function(){
+      fauxClick(cW/2, cH/2);
+    }, 2000);
+    
+    function clearInactiveTimeout() {
+      clearTimeout(inactive);
+      document.removeEventListener("mousedown", clearInactiveTimeout);
+      document.removeEventListener("touchstart", clearInactiveTimeout);
+    }
+    
+    document.addEventListener("mousedown", clearInactiveTimeout);
+    document.addEventListener("touchstart", clearInactiveTimeout);
+  }
+  
+  function startFauxClicking() {
+    setTimeout(function(){
+      fauxClick(anime.random( cW * .2, cW * .8), anime.random(cH * .2, cH * .8));
+      startFauxClicking();
+    }, anime.random(200, 900));
+  }
+  
+  function fauxClick(x, y) {
+    var fauxClick = new Event("mousedown");
+    fauxClick.pageX = x;
+    fauxClick.pageY = y;
+    document.dispatchEvent(fauxClick);
+  }
+</script>
+
+
+</body>
+</html>
