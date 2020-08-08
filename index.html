@@ -17,6 +17,18 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>    
 
     <div class="page1" id="landpage" >
+
+      <div class="header" id="myHeader">
+        <div class="logo"> <a href="index.html"><img src="../../img/webimg/logo.png"></a></div>
+        <ul>
+          <li><a href="#home">HOME</a></li>
+          <li><a href="#home">ABOUT</a></li>
+          <li><a href="#home">LATEST</a></li>
+          <li><a href="#home">WINGS</a></li>
+          <li><a href="#home">CORDINATERS</a></li>
+          <li><a href="#home">CONTECT</a></li>
+        </ul>
+      </div>
         
          <div class="center-text">
 
@@ -33,6 +45,13 @@
         </div>
     </div>
 
+    <!-- <div class="about">
+      <div class="text-box">
+        <p>
+          We are the technical club of IIIT Lucknow who aimed towards solving real world problems. We are distributed into six wings namely Competitive Coding, Cyber Security, Design, Machine Learning, Software Development & Web Development.
+        </p>
+      </div>
+    </div> -->
 
     <div class="page2">
        <div class="title-box"><h2 class="title">WINGS</h2></div>
@@ -44,7 +63,7 @@
             </div>
             </a>
 
-            <a href="wings/app/app.html"> 
+            <a href="wings/app/appd.html"> 
                 <div class="wing" data-aos="fade-up">
                     <h2>App Development</h2>
                     <p>DESIGN FIRST , THEN CODE<br> more</p>
@@ -82,6 +101,46 @@
 
     </div>
 
+    <div class="cordinators">
+      <h2 class="title">Coordinators</h2>
+      <div class="flexcontainer">
+        <div class="flexbox">
+          <div class="fleximg"><img src="img/webimg/rishabsir.jpeg"></div>
+          <div class="member-name"> <h3>Rishabh Shukla</h3>  </div>
+          <div class="social-icon"> 
+            <a href="#"> <i class="fab fa-linkedin" aria-hidden="true"></i> </a> 
+            <a href="#"> <i class="fab fa-instagram" aria-hidden="true"></i> </a>
+            <a href="#"> <i class="fab fa-github" aria-hidden="true"></i>    </a> 
+          </div>
+        </div>
+    
+        <div class="flexbox">
+          <div class="fleximg"><img src="../../img/webimg/"></div>
+          <div class="member-name"> <h3>Akshat Singh</h3></div>
+          <div class="social-icon"> 
+            <a href="#"> <i class="fab fa-linkedin" aria-hidden="true"></i> </a> 
+            <a href="#"> <i class="fab fa-instagram" aria-hidden="true"></i> </a>
+            <a href="#"> <i class="fab fa-github" aria-hidden="true"></i>    </a> 
+          </div>
+        </div>
+    
+    </div>
+
+
+    <footer class="footer">
+      <div class="contects">
+        <a href="#"> <i class="fab fa-linkedin" aria-hidden="true"></i> </a>
+        <a href="#"> <i class="fab fa-instagram" aria-hidden="true"></i> </a>
+        <a href="#"> <i class="fab fa-github" aria-hidden="true"></i>    </a>
+        <a href="#"> <i class="fab fa-facebook" aria-hidden="true"></i>    </a>
+        <a href="#"> <i class="fab fa-medium" aria-hidden="true"></i>    </a>
+      </div>
+      <div class="copy">
+        &copy;Axios
+      </div>
+      </footer>
+
+
 
 <script>
     AOS.init();
@@ -92,12 +151,12 @@
   var ctx = c.getContext("2d");
   var cH;
   var cW;
-  var bgColor = "#FF6138";
+  var bgColor = "#282741";
   var animations = [];
   var circles = [];
   
   var colorPicker = (function() {
-    var colors = ["#FF6138", "#FFBE53", "#2980B9", "#282741"];
+    var colors = ["#282741", "#36948f", "#2980B9", "#FF6138"];
     var index = 0;
     function next() {
       index = index++ < colors.length-1 ? index : 0;
@@ -298,6 +357,26 @@
   }
 </script>
 
+<script>
+  window.onscroll = function() {myFunction()};
+  
+  var header = document.getElementById("myHeader");
+  
+  // Get the offset position of the navbar
+  var sticky = header.offsetTop;
+  
+  function myFunction() {
+    console.log(sticky)
+    console.log(window.pageYOffset)
+    if (window.pageYOffset > sticky) {
+      header.classList.remove("header");
+      header.classList.add("sticky");
+    } else {
+      header.classList.add("header");
+      header.classList.remove("sticky");
+    }
+  }
+</script>
 
 </body>
 </html>

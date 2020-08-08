@@ -22,6 +22,50 @@ canvas {
   top: -100vh;
 }
 
+
+.header {
+  display: none;
+}
+
+
+.logo img{
+  padding: 0;
+  margin: 0 auto;
+  width: 40px;
+  height: 40px;
+}
+
+.sticky {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 10px 16px;
+  background: rgba(66, 88, 88, 0.541);
+  color: #f1f1f1;
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+ul{
+  display: flex;
+  list-style-type: none;
+  font-size: 16px;
+  justify-content: center;
+  margin: 0px;
+}
+
+li{
+  margin:2vh 4vw 0 1vw ;
+  font-family: Arial;
+}
+
+li a{
+  color: rgba(214, 229, 230, 0.7);
+  text-decoration: none;
+}
+
 .page1 .center-text{
   text-align: center;
   margin-top:150px ;
@@ -65,13 +109,17 @@ outline: none;
 
 
 .title{
+  max-width: 90vw;
+  margin: 0px 20px 0px 50px;
   text-align: center;
   color: rgba(239, 245, 243, 0.9);
   font-size: 30px;
   border-bottom: solid rgba(239, 245, 243, 0.9) 2px;
 }
 
+
 .wings{
+  max-width: 97vw;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -98,5 +146,57 @@ outline: none;
 }
 
 
+.cordinators{
+  margin-top: 100px;
+}
+
+.flexcontainer{
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.flexbox{
+  width: 200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fleximg img{ 
+  border-radius: 50%;  
+  width: 150px;
+  height: 150px; 
+}
+
+.member-name{
+  font-size: 15px;
+  color:  #c6c9cc; 
+}
+.social-icon a{
+  font-size: 20px;
+  color: #c6c9cc;
+  margin: 0 0 20px 20px;
+  text-decoration: none;
+}
 
   
+.footer {
+  margin-top: 10px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.contects a {
+  font-size: 30px;
+  color: #c6c9cc;
+  margin: 10px;
+  text-decoration: none;
+}
+
+.copy {
+  margin-top: 20px;
+}
